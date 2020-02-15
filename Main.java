@@ -72,13 +72,12 @@ public class Main {
 	public static void PrintResults() {
 
 		Iterator iter = results.entrySet().iterator();
-		System.out.println("  Name of Service \t| Amount of request to service \t| Max time of request execution");
-		System.out.println("========================================================================================");
+		System.out.println("  Name of Service \t| Amount of request to service \t| Max time of request execution(ms)");
+		System.out.println("===========================================================================================");
 		while (iter.hasNext()) {
 			Map.Entry entry = (Map.Entry) iter.next();
 			Result result = (Result) entry.getValue();
-			String maxTime = (new SimpleDateFormat("hh:mm:ss,SSS")).format(new Date(result.maxTime));
-			System.out.format("%17s\t| %28d\t| %29s\n", result.serviceName, result.numOfRequests, maxTime);
+			System.out.format("%17s\t| %28d\t| %29s\n", result.serviceName, result.numOfRequests, result.maxTime);
 		}
 	}
 }
