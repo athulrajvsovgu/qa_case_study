@@ -1,5 +1,3 @@
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -10,13 +8,17 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+
+	/*
+	 * Declaring Hashmaps to store service calls and results
+	 */
 	public static HashMap<Integer, ServiceCall> serviceCalls = new HashMap<Integer, ServiceCall>();
 	public static HashMap<String, Result> results = new HashMap<String, Result>();
 	public static File logfile;
 
 	public static void main(String args[]) {
-		Scanner scanner = null;
 
+		Scanner scanner = null;
 		System.out.println("Opening log File...");
 		try {
 			logfile = new File("/usr/src/qa_case_study/test.log");
@@ -50,18 +52,17 @@ public class Main {
 		PrintResults();
 	}
 
-	public static PrasedLogLine parseLine(String logLine) {
-		return null;
-
-	}
-
+	/*
+	 * Iterate through service calls and process them to results
+	 */
 	public static void ProcessServiceCalls() {
+
 		Iterator iter = serviceCalls.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry entry = (Map.Entry) iter.next();
 			ServiceCall serviceCall = (ServiceCall) entry.getValue();
 			if (results.containsKey(serviceCall.serviceName)) {
-				results.get(serviceCall.serviceName).incrementRequest(serviceCall.getTimeDetla());
+				results.get(serviceCall.serviceName).incrementRequest(serviceCall.getTimeDelta());
 			} else {
 				results.put(serviceCall.serviceName, new Result(serviceCall));
 			}
@@ -69,6 +70,7 @@ public class Main {
 	}
 
 	public static void PrintResults() {
+
 		Iterator iter = results.entrySet().iterator();
 		System.out.println("  Name of Service \t| Amount of request to service \t| Max time of request execution");
 		System.out.println("========================================================================================");
